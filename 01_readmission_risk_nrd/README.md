@@ -65,3 +65,13 @@ This approach mirrors real-world hospital risk stratification.
 ---
 
 ## 6. Project Structure
+
+## 7. Tools
+- Python (pandas, scikit-learn)
+- Jupyter (VS Code)
+- SQL (optional)
+- Power BI (later stage)
+
+## 8. Status
+Project in progress — dataset selected, structure finalized.
+
