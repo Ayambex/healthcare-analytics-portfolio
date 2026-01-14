@@ -1,83 +1,67 @@
-# Hospital Readmission Risk Analysis (HCUP NRD)
+# Hospital Readmission & Discharge Risk Analysis (NY SPARCS)
 
 ## 1. Business Problem
-Hospital readmissions within 30 days of discharge increase healthcare costs and often indicate gaps in care coordination and discharge planning.  
-This project focuses on identifying patients at **high risk of 30-day readmission** to support targeted interventions and improve outcomes.
+Hospital readmissions and unsafe discharges increase costs and negatively impact patient outcomes.
+This project analyzes inpatient hospital discharge data to identify **patients at high risk of readmission
+or requiring intensive post-acute care**.
 
 **Key Question:**  
-Which patients are most likely to be readmitted within 30 days, and what clinical or operational factors drive that risk?
+Which inpatient discharges are most likely to result in readmission risk or complex post-discharge needs,
+and what factors drive that risk?
 
 ---
 
 ## 2. Dataset
-**HCUP Nationwide Readmissions Database (NRD)**  
-Source: Agency for Healthcare Research and Quality (AHRQ)
+**New York Statewide Planning and Research Cooperative System (SPARCS)**  
+Source: New York State Department of Health
 
-The NRD is a nationally representative U.S. inpatient database designed specifically for readmission analysis.
+SPARCS is a comprehensive, all-payer inpatient discharge dataset used by health systems,
+researchers, and policymakers to analyze hospital utilization, outcomes, and efficiency.
 
-> ⚠️ Raw NRD data is not included in this repository due to licensing restrictions.  
-> This project focuses on reproducible analytics workflows, feature engineering logic, and modeling approaches.
+> This project uses publicly available SPARCS data (CSV format).  
+> No restricted or licensed data is included in this repository.
 
 ---
 
 ## 3. Objectives
-- Build a **binary classification model** to predict 30-day readmission
-- Engineer clinically meaningful features from inpatient encounter data
-- Evaluate performance using healthcare-appropriate metrics
-- Translate insights into actionable recommendations
+- Identify high-risk discharge patterns using inpatient data
+- Engineer clinically and operationally meaningful features
+- Build a predictive risk model for discharge/readmission risk
+- Translate insights into hospital operational recommendations
 
 ---
 
-## 4. Methods Overview
+## 4. Target Definition (Portfolio-Appropriate)
+Because SPARCS does not always include a direct 30-day readmission flag, risk is modeled using:
+- Discharge disposition (SNF, rehab, home health)
+- Length of stay (extended LOS)
+- Emergency admissions
+- Diagnosis severity categories
+
+This approach mirrors real-world hospital risk stratification.
+
+---
+
+## 5. Methods Overview
 
 ### Feature Engineering (Examples)
 - Demographics: age group, sex
-- Clinical burden: comorbidity count, chronic condition indicators
-- Utilization history: prior admissions, length of stay
-- Encounter context: admission type, discharge disposition
-- Payer characteristics
+- Admission context: emergency vs elective
+- Clinical complexity: diagnosis groupings
+- Utilization: length of stay buckets
+- Discharge disposition
+- Payer category
 
 ### Modeling
 - Baseline: Logistic Regression
-- Advanced: Tree-based model (e.g., Random Forest or Gradient Boosting)
-- Class imbalance handling via class weights or threshold tuning
+- Advanced: Tree-based model (Random Forest / Gradient Boosting)
 
 ### Evaluation Metrics
 - ROC-AUC
-- Precision, Recall, F1-Score
+- Precision / Recall
 - Confusion Matrix
-- Model interpretability for clinical relevance
+- Feature importance for interpretability
 
 ---
 
-## 5. Project Structure
-01_readmission_risk_nrd
-├── notebooks # EDA and modeling notebooks
-├── src # Python scripts for reusable logic
-├── sql # Cohort and feature SQL
-├── docs # Reports and documentation
-└── data # Raw/processed placeholders (no PHI stored)
----
-
-## 6. Deliverables
-- Exploratory Data Analysis
-- Feature engineering pipeline
-- Predictive readmission model
-- Model performance evaluation
-- Business and clinical insights
-
----
-
-## 7. Tools
-- Python (pandas, scikit-learn)
-- SQL
-- Jupyter (via VS Code)
-- Power BI (later phase)
-
----
-
-## 8. Status
-🚧 Project in progress — structure and foundation completed.
-
-
-
+## 6. Project Structure
